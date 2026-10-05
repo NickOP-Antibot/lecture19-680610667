@@ -33,9 +33,12 @@ app.use(
     origin: (process.env.CORS_ORIGIN || "http://localhost:5173").split(","),
   }),
 );
-
-// body parser middleware
 app.use(express.json());
+
+app.use("/api/v3/users", userRouter_v3);
+app.use("/api/v3/students", studentRouter_v3);
+app.use("/api/v3/courses", courseRouter_v3);
+app.use("/api/v3/enrollments", enrollmentRouter_v3);
 
 // logger middleware
 app.use(morgan("dev"));
