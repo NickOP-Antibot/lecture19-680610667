@@ -1,0 +1,96 @@
+// ./prisma/schema.prisma
+// ขั้นที่ 17 — MongoDB: โครงสร้างข้อมูล (แต่ละ model = 1 collection ตาม @@map)
+// ขั้นที่ 16 — `pnpm db:generate` สร้าง Prisma Client (generated/prisma/client.ts) จากไฟล์นี้
+// Student 1 ─── * Enrollment * ─── 1 Course
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// 🧩 Model: Student
+// =======================
+model Student {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  studentId String   @unique
+  firstName String
+  lastName  String
+  program   String
+  programId Int? // optional: ฟอร์มฝั่ง Frontend ไม่ได้ส่ง programId มา
+  interests String[] // ความสนใจ (id เช่น "web", "ai") จากฟอร์มเพิ่มนักศึกษา
+  emails    String[] // อีเมลของนักศึกษา (1-3 อีเมล)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  enrollments Enrollment[] // Virtual back-relation: A user can have multiple enrollments
+  files       File[] // Virtual back-relation: A user can have multiple files
+
+  @@map("Students")
+}
+
+// 🧩 Model: Course
+// =======================
+model Course {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  courseId    String   @unique
+  courseTitle String
+  instructors String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  enrollments Enrollment[] // Virtual back-relation: A course can have multiple enrollments
+
+  @@map("Courses")
+}
+
+// 🧩 Model: Enrollment
+// =======================
+model Enrollment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  studentId String // relation field
+  student   Student  @relation(fields: [studentId], references: [studentId])
+  courseId  String // relation field
+  course    Course   @relation(fields: [courseId], references: [courseId])
+  grade     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("Enrollments")
+}
+
+enum Role {
+  STUDENT
+  ADMIN
+}
+
+// 🧩 Model: User
+// =======================
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  username  String   @unique
+  password  String
+  studentId String?
+  role      Role     @default(STUDENT)
+  tokens    String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("Users")
+}
+
+// 🧩 Model: File
+// =======================
+model File {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  fileName  String   @unique
+  studentId String // relation field
+  student   Student  @relation(fields: [studentId], references: [studentId])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("Files")
+}

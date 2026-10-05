@@ -1,0 +1,54 @@
+[
+  {
+    "studentId": "680610001",
+    "firstName": "Matt",
+    "lastName": "Damon",
+    "program": "CPE",
+    "programId": 101,
+    "createdAt": {
+      "$date": "2026-08-07T16:29:19.134Z"
+    },
+    "updatedAt": {
+      "$date": "2026-08-07T16:41:40.892Z"
+    }
+  },
+  {
+    "studentId": "680610002",
+    "firstName": "Cillian",
+    "lastName": "Murphy",
+    "program": "CPE",
+    "programId": 101,
+    "createdAt": {
+      "$date": "2026-08-07T16:29:19.134Z"
+    },
+    "updatedAt": {
+      "$date": "2026-08-07T16:41:40.892Z"
+    }
+  },
+  {
+    "studentId": "680610003",
+    "firstName": "Emily",
+    "lastName": "Blunt",
+    "program": "ISNE",
+    "programId": 102,
+    "createdAt": {
+      "$date": "2026-08-07T16:29:19.134Z"
+    },
+    "updatedAt": {
+      "$date": "2026-08-07T16:41:40.892Z"
+    }
+  },
+  {
+    "studentId": "680615015",
+    "firstName": "Lisa",
+    "lastName": "Na baan yuan",
+    "program": "ISNE",
+    "programId": 102,
+    "createdAt": {
+      "$date": "2026-08-07T16:29:19.134Z"
+    },
+    "updatedAt": {
+      "$date": "2026-08-07T16:41:40.892Z"
+    }
+  }
+]

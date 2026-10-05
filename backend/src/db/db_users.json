@@ -1,0 +1,50 @@
+[
+  {
+    "username": "user1@abc.com",
+    "password": "$2b$10$BuyRls5Tgok0JVFsPZiTU./TUrcGM3jHkTkf.3/Y.5ecY6d/NIJ8a",
+    "studentId": "680610001",
+    "role": "STUDENT",
+    "createdAt": {
+      "$date": "2026-08-07T16:29:19.134Z"
+    },
+    "updatedAt": {
+      "$date": "2026-08-07T16:41:40.892Z"
+    }
+  },
+  {
+    "username": "user2@abc.com",
+    "password": "$2b$10$vq1Na4KxOV2EpN1z4cuwLOjOR3dHdA2.SyBb/M2WBZnyNOw1FT2PK",
+    "studentId": "680610002",
+    "role": "STUDENT",
+    "createdAt": {
+      "$date": "2026-08-07T16:29:19.134Z"
+    },
+    "updatedAt": {
+      "$date": "2026-08-07T16:41:40.892Z"
+    }
+  },
+  {
+    "username": "user3@abc.com",
+    "password": "$2b$09$CZG1ofFP0wwFfnNFGlL8e.ZGreMPgdjMJrLV0Ql/8V8oxTp6J5X4K",
+    "studentId": "680610003",
+    "role": "STUDENT",
+    "createdAt": {
+      "$date": "2026-08-07T16:29:19.134Z"
+    },
+    "updatedAt": {
+      "$date": "2026-08-07T16:41:40.892Z"
+    }
+  },
+  {
+    "username": "user4@abc.com",
+    "password": "$2b$10$WCdYUH.OYFZSPnFx5AXqye93.IyFQGEqvF0c.UCuHLmQ0Io3SveXW",
+    "studentId": null,
+    "role": "ADMIN",
+    "createdAt": {
+      "$date": "2026-08-07T16:29:19.134Z"
+    },
+    "updatedAt": {
+      "$date": "2026-08-07T16:41:40.892Z"
+    }
+  }
+]

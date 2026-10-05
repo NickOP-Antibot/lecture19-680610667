@@ -1,0 +1,612 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: lab10-restful-4
+meta:
+  id: wrk_8a4e61c3f9d64d20b172332069b01366
+  created: 1758684365581
+  modified: 1790726400000
+  description: ""
+collection:
+  - name: Users
+    meta:
+      id: fld_3f1a9c2e7b6d4e0a9c8b7a6f5e4d3c21
+      created: 1790726400000
+      modified: 1790726400000
+      sortKey: -1790726400500
+      description: ""
+    children:
+      - url: "{{ _.v3 }}/users/login"
+        name: /v3/users/login (ADMIN)
+        meta:
+          id: req_d614249f819146e7954bfcaebd5634c7
+          created: 1786115237566
+          modified: 1790726400000
+          isPrivate: false
+          description: Login เป็น ADMIN — copy ค่า data.token จาก response ไปใส่ใน env `admin_token`
+          sortKey: -1790726400100
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"username": "user4@abc.com",
+            	"password": "5678"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.v3 }}/users/login"
+        name: /v3/users/login (STUDENT)
+        meta:
+          id: req_5b1e0c7a9d2f4e6b8a3c1d0e9f7a6b52
+          created: 1790726400000
+          modified: 1790726400000
+          isPrivate: false
+          description: Login เป็น STUDENT — copy ค่า data.token จาก response ไปใส่ใน env `student_token`
+          sortKey: -1790726400090
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"username": "user1@abc.com",
+            	"password": "1234"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.v3 }}/users/6a760f8b61b15de1d6284b99"
+        name: /v3/users/:userId
+        meta:
+          id: req_1a9998b2bfdf4cd19156ce30fccecb87
+          created: 1786178046922
+          modified: 1790726400000
+          isPrivate: false
+          description: userId คือ ObjectId ของ user ใน MongoDB
+          sortKey: -1790726400080
+        method: GET
+        authentication:
+          type: bearer
+          token: "{{ _.student_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.v3 }}/users"
+        name: /v3/users (DELETE)
+        meta:
+          id: req_6455728571cb4ce7af443435185568ed
+          created: 1786274283230
+          modified: 1790726400000
+          isPrivate: false
+          description: ADMIN only — ลบตัวเองไม่ได้
+          sortKey: -1790726400070
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"username": "user6@abc.com"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.admin_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.v3 }}/users/logout"
+        name: /v3/users/logout
+        meta:
+          id: req_2a392bf237bd49cc94155e5c155d0b1e
+          created: 1786163151115
+          modified: 1790726400000
+          isPrivate: false
+          description: ""
+          sortKey: -1790726400060
+        method: POST
+        authentication:
+          type: bearer
+          token: "{{ _.admin_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Students
+    meta:
+      id: fld_7c2b8d1e4f5a4b3c9d0e1f2a3b4c5d62
+      created: 1790726400000
+      modified: 1790726400000
+      sortKey: -1790726400400
+      description: ""
+    children:
+      - url: "{{ _.v3 }}/students?program=CPE"
+        name: /v3/students
+        meta:
+          id: req_9540ae37435d4965836b2d7d8dc3a9f8
+          created: 1786282355788
+          modified: 1790726400000
+          isPrivate: false
+          description: ADMIN only — query `program` (CPE | ISNE) ไม่ใส่ก็ได้
+          sortKey: -1790726400100
+        method: GET
+        authentication:
+          type: bearer
+          token: "{{ _.admin_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.v3 }}/students/680610001"
+        name: /v3/students/:studentId
+        meta:
+          id: req_a1c3e5f7092b4d6f8a1c3e5f7092b4d6
+          created: 1790726400000
+          modified: 1790726400000
+          isPrivate: false
+          description: ADMIN ดูได้ทุกคน, STUDENT ดูได้เฉพาะของตัวเอง
+          sortKey: -1790726400090
+        method: GET
+        authentication:
+          type: bearer
+          token: "{{ _.student_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.v3 }}/students"
+        name: /v3/students (POST)
+        meta:
+          id: req_b2d4f6a8103c4e7a9b2d4f6a8103c4e7
+          created: 1790726400000
+          modified: 1790726400000
+          isPrivate: false
+          description: ADMIN only
+          sortKey: -1790726400080
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"studentId": "680610099",
+            	"firstName": "Tom",
+            	"lastName": "Hardy",
+            	"program": "CPE",
+            	"interests": ["web", "ai"],
+            	"emails": ["tom.hardy@cmu.ac.th"]
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.admin_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.v3 }}/students"
+        name: /v3/students (PUT)
+        meta:
+          id: req_c3e5a7b9214d4f8b0c3e5a7b9214d4f8
+          created: 1790726400000
+          modified: 1790726400000
+          isPrivate: false
+          description: ADMIN หรือ STUDENT เจ้าของข้อมูล — ส่งเฉพาะ field ที่ต้องการแก้
+          sortKey: -1790726400070
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"studentId": "680610099",
+            	"firstName": "Thomas",
+            	"program": "ISNE"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.admin_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.v3 }}/students"
+        name: /v3/students (DELETE)
+        meta:
+          id: req_d4f6b8c0325e4a9c1d4f6b8c0325e4a9
+          created: 1790726400000
+          modified: 1790726400000
+          isPrivate: false
+          description: ADMIN only
+          sortKey: -1790726400060
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"studentId": "680610099"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.admin_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Courses
+    meta:
+      id: fld_9e4d0f3a6b7c4d5e8f9a0b1c2d3e4f73
+      created: 1790726400000
+      modified: 1790726400000
+      sortKey: -1790726400300
+      description: ""
+    children:
+      - url: "{{ _.v3 }}/courses"
+        name: /v3/courses
+        meta:
+          id: req_225b2298e5954a1fa834845ecf826f5e
+          created: 1786157990654
+          modified: 1790726400000
+          isPrivate: false
+          description: ""
+          sortKey: -1790726400100
+        method: GET
+        authentication:
+          type: bearer
+          token: "{{ _.admin_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.v3 }}/courses/261207"
+        name: /v3/courses/:courseId
+        meta:
+          id: req_1375b309170a4707906e49569c886c3e
+          created: 1786193815184
+          modified: 1790726400000
+          isPrivate: false
+          description: ""
+          sortKey: -1790726400090
+        method: GET
+        authentication:
+          type: bearer
+          token: "{{ _.student_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.v3 }}/courses"
+        name: /v3/courses (POST)
+        meta:
+          id: req_cef7d6aa508645028064d554fbcb44cc
+          created: 1786195365910
+          modified: 1790726400000
+          isPrivate: false
+          description: ADMIN only
+          sortKey: -1790726400080
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"courseId": "261336",
+            	"courseTitle": "Computer Network Lab.",
+            	"instructors": [
+            		"Dome",
+            		"Yuthapong"
+            	]
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.admin_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.v3 }}/courses"
+        name: /v3/courses (PUT)
+        meta:
+          id: req_e5a7c9d1436f4b0d2e5a7c9d1436f4b0
+          created: 1790726400000
+          modified: 1790726400000
+          isPrivate: false
+          description: ADMIN only — ส่งเฉพาะ field ที่ต้องการแก้
+          sortKey: -1790726400070
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"courseId": "261336",
+            	"courseTitle": "Computer Network Laboratory"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.admin_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.v3 }}/courses"
+        name: /v3/courses (DELETE)
+        meta:
+          id: req_f6b8d0e2547a4c1e3f6b8d0e2547a4c1
+          created: 1790726400000
+          modified: 1790726400000
+          isPrivate: false
+          description: ADMIN only
+          sortKey: -1790726400060
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"courseId": "261336"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.admin_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Enrollments
+    meta:
+      id: fld_1a5e2b6f8c9d4e0f1a2b3c4d5e6f7a84
+      created: 1790726400000
+      modified: 1790726400000
+      sortKey: -1790726400200
+      description: ""
+    children:
+      - url: "{{ _.v3 }}/enrollments"
+        name: /v3/enrollments
+        meta:
+          id: req_07c9e1f3658b4d2f4a07c9e1f3658b4d
+          created: 1790726400000
+          modified: 1790726400000
+          isPrivate: false
+          description: ADMIN เห็นทั้งหมด, STUDENT เห็นเฉพาะของตัวเอง
+          sortKey: -1790726400100
+        method: GET
+        authentication:
+          type: bearer
+          token: "{{ _.student_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.v3 }}/enrollments"
+        name: /v3/enrollments (POST)
+        meta:
+          id: req_18d0f2a4769c4e3a5b18d0f2a4769c4e
+          created: 1790726400000
+          modified: 1790726400000
+          isPrivate: false
+          description: ADMIN ลงให้ใครก็ได้, STUDENT ลงได้เฉพาะตัวเอง
+          sortKey: -1790726400090
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"studentId": "680610001",
+            	"courseId": "261207"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.student_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Files
+    meta:
+      id: fld_2b6f3c7a9d0e4f1a2b3c4d5e6f7a8b95
+      created: 1790726400000
+      modified: 1790726400000
+      sortKey: -1790726400100
+      description: ""
+    children:
+      - url: "{{ _.v3 }}/file/upload"
+        name: /v3/file/upload
+        meta:
+          id: req_b974f56cd45e425eaacbd9f91ba3b920
+          created: 1786199479509
+          modified: 1790726400000
+          isPrivate: false
+          description: เลือกไฟล์รูปในช่อง `file` ก่อนกดส่ง
+          sortKey: -1790726400100
+        method: POST
+        body:
+          mimeType: multipart/form-data
+          params:
+            - name: file
+              value: ""
+              description: ""
+              disabled: false
+              fileName: ""
+              type: file
+            - name: studentId
+              value: "680610001"
+              description: ""
+              disabled: false
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.v3 }}/file/680610001"
+        name: /v3/file/:studentId
+        meta:
+          id: req_3cd24cd8bf3f405bbd2150a783996703
+          created: 1786251101904
+          modified: 1790726400000
+          isPrivate: false
+          description: ""
+          sortKey: -1790726400090
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.v3 }}/file/view/file-1786200381984-616733468.png"
+        name: /v3/file/view/:filename
+        meta:
+          id: req_e63cf978c2ee4e0ab74a20abdf842784
+          created: 1786251370732
+          modified: 1790726400000
+          isPrivate: false
+          description: ""
+          sortKey: -1790726400080
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.v3 }}/file/file-1786251710460-641417373.png"
+        name: /v3/file/:filename
+        meta:
+          id: req_7c0021bfdfc94e1299671e9ad9a5316e
+          created: 1786251224084
+          modified: 1790726400000
+          isPrivate: false
+          description: ""
+          sortKey: -1790726400070
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_3299abb614f8b800a0971debbf28d5e9f9964e47
+    created: 1785255703213
+    modified: 1785255703213
+environments:
+  name: Base Environment
+  meta:
+    id: env_3299abb614f8b800a0971debbf28d5e9f9964e47
+    created: 1758684365591
+    modified: 1790726400000
+    isPrivate: false
+  data:
+    todo: localhost:3001
+    v3: localhost:3000/api/v3
+    admin_token: ""
+    student_token: ""

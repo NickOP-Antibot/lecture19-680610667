@@ -1,0 +1,44 @@
+[
+  {
+    "courseId": "261207",
+    "courseTitle": "Basic Computer Engineering Lab",
+    "instructors": [
+      "Dome",
+      "Chanadda"
+    ],
+    "createdAt": {
+      "$date": "2026-08-07T16:29:19.134Z"
+    },
+    "updatedAt": {
+      "$date": "2026-08-07T16:41:40.892Z"
+    }
+  },
+  {
+    "courseId": "261497",
+    "courseTitle": "Full Stack Development",
+    "instructors": [
+      "Dome",
+      "Nirand",
+      "Chanadda"
+    ],
+    "createdAt": {
+      "$date": "2026-08-07T16:29:19.134Z"
+    },
+    "updatedAt": {
+      "$date": "2026-08-07T16:41:40.892Z"
+    }
+  },
+  {
+    "courseId": "269101",
+    "courseTitle": "Introduction to Information Systems and Network Engineering",
+    "instructors": [
+      "KENNETH COSH"
+    ],
+    "createdAt": {
+      "$date": "2026-08-07T16:29:19.134Z"
+    },
+    "updatedAt": {
+      "$date": "2026-08-07T16:41:40.892Z"
+    }
+  }
+]
