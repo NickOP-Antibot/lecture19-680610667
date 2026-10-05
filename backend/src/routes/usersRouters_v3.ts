@@ -125,7 +125,7 @@ router.post("/login", async (req: Request, res: Response) => {
     );
 
     // remove expired tokens, then store the new token in user.tokens
-    const validTokens = (user.tokens ?? []).filter((t) => {
+    const validTokens = (user.tokens ?? []).filter((t: string) => {
       try {
         jwt.verify(t, jwt_secret);
         return true;

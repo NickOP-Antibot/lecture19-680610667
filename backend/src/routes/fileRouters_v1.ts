@@ -52,10 +52,10 @@ const fileFilter = (
 };
 
 const upload = multer({
-  storage: storage, 
+  storage: storage,
   fileFilter: fileFilter,
-  limits: { fileSize: 10 * 1024 * 1024 } // 10MB
- });
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+});
 
 // Serve the "uploads" folder statically so users can view file
 // GET /api/v3/file/view/:filename - Endpoint to access specific file
@@ -78,7 +78,7 @@ router.post(
 
     // check if studentId does exist
     const student = await prisma.student.findUnique({
-      where: { studentId: studentId as string}
+      where: { studentId: studentId as string },
     });
 
     if (!student) {
@@ -93,8 +93,8 @@ router.post(
     const created = await prisma.file.create({
       data: {
         fileName: filename,
-        studentId: studentId
-      }
+        studentId: studentId,
+      },
     });
 
     // Construct a public view URL for the client
@@ -116,41 +116,41 @@ router.get("/:studentId", async (req: Request, res: Response) => {
     const studentId = req.params.studentId as string;
 
     if (!studentId) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
-        message: "Student ID is required as parameter in URL" 
+        message: "Student ID is required as parameter in URL",
       });
     }
 
     const files = await prisma.file.findMany({
-      where: { studentId: studentId}
+      where: { studentId: studentId },
     });
 
     if (!files) {
       return res.status(404).json({
         success: false,
-        message: "Student ID does not have any files."
+        message: "Student ID does not have any files.",
       });
     }
 
-    const files_data = files.map((f) => { 
+    const files_data = files.map((f: any) => {
       return {
         fileName: f.fileName,
         fileUrl: `${req.protocol}://${req.get("host")}/api/v3/file/view/${f.fileName}`,
-        createdAt: f.createdAt
-      }
+        createdAt: f.createdAt,
+      };
     });
 
     return res.status(200).json({
       success: true,
       message: `Get files for ${studentId} successfully.`,
-      data: files_data
-    })
+      data: files_data,
+    });
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: 'Something is wrong, unable to process your request.'
-    })
+      message: "Something is wrong, unable to process your request.",
+    });
   }
 });
 
@@ -161,9 +161,9 @@ router.delete("/:filename", (req: Request, res: Response): void => {
     console.log(filename);
 
     if (!filename) {
-      res.status(400).json({ 
+      res.status(400).json({
         success: false,
-        error: "Filename is required as parameter in URL" 
+        error: "Filename is required as parameter in URL",
       });
       return;
     }
@@ -175,9 +175,9 @@ router.delete("/:filename", (req: Request, res: Response): void => {
 
     // Verify file path belongs to the directory and exists
     if (!fs.existsSync(filePath)) {
-      res.status(404).json({ 
+      res.status(404).json({
         success: false,
-        error: "File not found" 
+        error: "File not found",
       });
       return;
     }
@@ -189,20 +189,20 @@ router.delete("/:filename", (req: Request, res: Response): void => {
       }
 
       const deleted = await prisma.file.delete({
-        where: { fileName: safeFilename},
+        where: { fileName: safeFilename },
       });
 
-      res.status(200).json({ 
+      res.status(200).json({
         success: true,
         message: `File ${safeFilename} was deleted successfully`,
-        data: deleted 
+        data: deleted,
       });
     });
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: 'Something is wrong, unable to process your request.'
-    })
+      message: "Something is wrong, unable to process your request.",
+    });
   }
 });
 
